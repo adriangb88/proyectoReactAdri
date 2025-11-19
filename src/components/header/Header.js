@@ -1,13 +1,15 @@
 import React from "react";
-import './Header.css'
+import Logo from '../../img/iesn1.png';
+import './Header.css';
 
 class Header extends React.Component {
   render(){
-  return (
-    <div id="header">
-        <h3>Bienvenido a la pagina de incidencias</h3>
-    </div>
-  );
+    return (
+      <div className="header-container text-center p-3">
+        <img src={Logo} alt="Logo IES" width="100px" className="header-logo"/>
+        <h3 className="header-titulo">Bienvenido a la página de incidencias</h3>
+      </div>
+    );
   }
 }
 
