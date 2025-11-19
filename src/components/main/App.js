@@ -1,12 +1,12 @@
-import './App.css';
 import MiLista from '../lista/MiLista';
 import Footer from '../footer/Footer';
 import Header from '../header/Header';
 import React, { useState } from 'react';
 import Form from './Form';
+import './App.css';
+import Fondo from '../../img/R.jpg';
 
 function App() {
-
   const [incidencias, setIncidencias] = useState([
     {
       id_incidencias: 1,
@@ -21,67 +21,54 @@ function App() {
     },
     {
       id_incidencias: 2,
-      id_usuario: "adriangb88",
-      titulo: "Proyecto averia",
+      id_usuario: "pepe123",
+      titulo: "Ordenador no enciende",
       descripcion: "Ordenador no enciende",
       categoria: "Hardware",
       nivel_urgencia: "Baja",
       fecha_registro: "2025-10-20",
       estado: "Abierto",
-      ubicacion: "B205"
+      ubicacion: "A201"
     }
   ]);
 
-  const agregarIncidencia = (
-    titulo_nuevo,
-    id_usuario_nuevo,
-    descripcion_nuevo,
-    categoria_nuevo,
-    nivel_urgencia_nuevo,
-    ubicacion_nuevo
-  ) => {
-
+  const agregarIncidencia = (titulo, usuario, descripcion, categoria, urgencia, ubicacion) => {
     const fecha = new Date();
-    const year = fecha.getFullYear();
-    const mes = fecha.getMonth() + 1;
-    const dia = fecha.getDate();
-    const fecha_formateada = `${year}-${mes}-${dia}`;
-
-    const nueva_incidencia = {
+    const nueva = {
       id_incidencias: incidencias.length + 1,
-      id_usuario: id_usuario_nuevo,
-      titulo: titulo_nuevo,
-      descripcion: descripcion_nuevo,
-      categoria: categoria_nuevo,
-      nivel_urgencia: nivel_urgencia_nuevo,
-      fecha_registro: fecha_formateada,
+      id_usuario: usuario,
+      titulo: titulo,
+      descripcion: descripcion,
+      categoria: categoria,
+      nivel_urgencia: urgencia,
+      fecha_registro: `${fecha.getFullYear()}-${fecha.getMonth() + 1}-${fecha.getDate()}`,
       estado: "Abierta",
-      ubicacion: ubicacion_nuevo
+      ubicacion: ubicacion
     };
-
-    console.log("Nueva incidencia", nueva_incidencia);
-
-    // Actualización inmutable CORRECTA
-    setIncidencias([...incidencias, nueva_incidencia]);
+    setIncidencias([...incidencias, nueva]);
   };
 
   return (
     <>
-      <Header />
-      <h2>Mi Aplicación</h2>
+      <Header/>
+      <h2 className="titulo-app mb-4 text-center mt-4">Mi aplicación</h2>
+      
+      <div className="container-fluid mt-4 row" style={{
+        backgroundImage: `url(${Fondo})`,
+        backgroundSize: "cover",
+       
 
-      <div className="App">
-        <main>
-          <p>Este es mi contenido de la App</p>
-          <MiLista incidencias={incidencias} />
-        </main>
 
-        <aside>
-          <Form agregarIncidencia={agregarIncidencia} />
+      }}>
+        <aside className="col-md-6">
+          <MiLista incidencias={incidencias}/>
         </aside>
+        <main className="col-md-6">
+          <Form agregarIncidencia={agregarIncidencia}/>
+        </main>
       </div>
 
-      <Footer />
+      <Footer/>
     </>
   );
 }

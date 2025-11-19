@@ -2,71 +2,61 @@ import React from "react";
 import './Form.css';
 
 function Form(props) {
-
-    const envioFormulario = (event) => {
-        event.preventDefault();
-        const form = event.target;
-
+    const envioFormulario = (e) => {
+        e.preventDefault();
+        const f = e.target;
         props.agregarIncidencia(
-            form.titulo.value,
-            form.usuario.value,
-            form.descripcion.value,
-            form.categoria.value,
-            form.nivel.value,
-            form.ubicacion.value
+            f.titulo.value, 
+            f.usuario.value, 
+            f.descripcion.value, 
+            f.categoria.value, 
+            f.nivel.value, 
+            f.ubicacion.value
         );
+        f.reset();
     };
 
     return (
-        <div>
-            <h2>Registrar incidencias</h2>
+        <div className="formulario-container card p-4">
+            <h3 className="formulario-titulo card-title mb-4 text-center">Registrar incidencia</h3>
             <form onSubmit={envioFormulario}>
-                
-                <div className="elemento-form">
-                    <label>Titulo: </label>
-                    <input type="text" name="titulo" placeholder="Introduce el titulo de la incidencia" required />
+                <div className="mb-3">
+                    <label className="form-label formulario-label">Título Incidencia</label>
+                    <input className="form-control" type="text" name="titulo" required/>
                 </div>
-
-                <div className="elemento-form">
-                    <label>Id_usuario: </label>
-                    <input type="text" name="usuario" placeholder="Introduce el usuario de la incidencia" required />
+                <div className="mb-3">
+                    <label className="form-label formulario-label">Usuario</label>
+                    <input className="form-control" type="text" name="usuario" required/>
                 </div>
-
-                <div className="elemento-form">
-                    <label>Descripcion: </label>
-                    <input type="text" name="descripcion" placeholder="Introduce la descripcion de la incidencia" required />
+                <div className="mb-3">
+                    <label className="form-label formulario-label">Descripción</label>
+                    <textarea className="form-control" name="descripcion" rows="3"></textarea>
                 </div>
-
-                <div className="elemento-form">
-                    <label>Categoria: </label>
-                    <select name="categoria" required>
-                        <option value="">Seleccionar...</option>
+                <div className="mb-3">
+                    <label className="form-label formulario-label">Categoría</label>
+                    <select className="form-control" name="categoria">
+                        <option>Seleccionar...</option>
                         <option>Hardware</option>
                         <option>Software</option>
-                        <option>Red y conectividad</option>
-                        <option>Usuarios y Acceso</option>
-                        <option>Infraestructura</option>
+                        <option>Red</option>
                     </select>
                 </div>
-
-                <div className="elemento-form">
-                    <label>Nivel de urgencia: </label>
-                    <select name="nivel" required>
-                        <option value="">Seleccionar...</option>
+                <div className="mb-3">
+                    <label className="form-label formulario-label">Nivel de urgencia</label>
+                    <select className="form-control" name="nivel">
+                        <option>Seleccionar...</option>
                         <option>Alta</option>
                         <option>Media</option>
                         <option>Baja</option>
                     </select>
                 </div>
-
-                <div className="elemento-form">
-                    <label>Ubicacion: </label>
-                    <input type="text" name="ubicacion" placeholder="Introduce la ubicacion de la incidencia" required />
+                <div className="mb-3">
+                    <label className="form-label formulario-label">Ubicación</label>
+                    <input className="form-control" type="text" name="ubicacion"/>
                 </div>
-
-                <button type="submit" className="elemento-form-button">
-                    Registrar
-                </button>
+                <div className="d-grid mx-auto">
+                    <button type="submit" className="btn formulario-boton">Registrar</button>
+                </div>
             </form>
         </div>
     );
